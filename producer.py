@@ -37,7 +37,9 @@ class CameraProducer:
                 # Send frame to Kafka
                 self.producer.send(self.topic_name, {
                     'frame': frame_base64,
-                    'timestamp': str(datetime.datetime.now())
+                    'timestamp': str(datetime.datetime.now().timestamp()),
+                    'organization_id': 'shamsi-school',
+                    'camera_id': 'camera-1'
                 })
                 # print('Frame sent to Kafka Broker')
                 sleep(1)
@@ -50,8 +52,6 @@ class CameraProducer:
             print("Closing camera connection...")
             self.camera.release()
             self.producer.close()
-
-
 
 if __name__ == "__main__":
 

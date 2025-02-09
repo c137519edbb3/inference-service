@@ -9,7 +9,7 @@ class CLIPInferenceModel:
     def __init__(self, model_name="openai/clip-vit-large-patch14"):
         self.model = CLIPModel.from_pretrained(model_name)
         self.processor = CLIPProcessor.from_pretrained(model_name)
-        self.candidate_labels = ["a photo of a cat", "a photo of a dog"] # Default labels
+        self.candidate_labels = []  # Will be set later
 
     def set_labels(self, labels):
         """Update the candidate labels for classification"""
@@ -34,5 +34,6 @@ class CLIPInferenceModel:
         logits_per_image = outputs.logits_per_image
         probs = logits_per_image.softmax(dim=1)
         
-        # Return predictions as list of (label, probability) tuples
+        # Return predictions as a list of (label, probability) tuples
         return [(label, prob.item()) for label, prob in zip(self.candidate_labels, probs[0])]
+
