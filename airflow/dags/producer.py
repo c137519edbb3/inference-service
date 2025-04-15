@@ -85,9 +85,3 @@ if __name__ == "__main__":
         kafka_bootstrap_servers=args.kafka_servers
     )
     producer.start_streaming()
-
-
-#     camera_url = "https://192.168.100.9:8080/video"
-
-#     producer = CameraProducer(topic_name='camera_feed', camera_url=camera_url)
-#     producer.start_streaming()    
